@@ -2,7 +2,7 @@
 This repository utilizes a creative method to utilize alerting in Azure Data Factory via Logic Apps.  Below are the steps to setup a failure alert.  You could also modify these to create success alerts as well.
 
 1.	Create the <B>Logic App</B> using the settings below as guidance. <BR>
-Please keep <b>Plan type = Consumption</b>.  All other settings can be modified is needed. <br> &nbsp; <br>
+Please keep <b>Plan type = Consumption</b>.  All other settings can be modified as needed. <br> &nbsp; <br>
 ![Create Logic App](/img/1-createlogicapp.png)
 
 2. Once Deployed, go into the Logic App Designer and add a Trigger of <B>When a HTTP request is received</B>.
@@ -41,24 +41,24 @@ Please keep <b>Plan type = Consumption</b>.  All other settings can be modified 
 
 **NOTE**: For my example, I will send out an email, you can send a text via [Twilio](https://learn.microsoft.com/en-us/connectors/twilio/) or a [Microsoft Teams](https://learn.microsoft.com/en-us/connectors/teams/) notification as an alternative.
 
-4. Next,  create a New Step by adding the following action: **Office 365 Outlook – Send an email (V2) action**. <br> &nbsp; <br>
+4. Next, create a New Step by adding the following action: **Office 365 Outlook – Send an email (V2) action**. <br> &nbsp; <br>
 ![Logic App Action](/img/3-logicappaction.png)
 
-5. Sign in using your Office 365 account and use the Enter the data from the previous step option so that you have an intuitive email subject and body. <br> &nbsp; <br>
+5. Sign in using your Office 365 account and use the **Enter the data from the previous step** option so that you have an intuitive email subject and body. <br> &nbsp; <br>
 ![Logic App Email](/img/4-logicappemail.png)
 
 6. Next Save your Logic App and go back to the **When a HTTP request is received trigger** and retrieve the **HTTP POST URL** and copy it to Notepad.<br> &nbsp; <br>
 ![HTTP POST URL](/img/5-requestbodyjson.png)
 
-7. Within **Azure Data Factory**, open your pipeline and add the following parameters to your pipeline that will be used to populate the Logic App.  Make sure to add a **valid email** and a **valid URL to your Data Factory Studio** under Default value for both values.<br> &nbsp; <br>
+7. Within **Azure Data Factory**, open your pipeline and add the following parameters to your pipeline that will be used to populate the Logic App.  Make sure to add a **valid email** and a **valid URL to your Data Factory Studio** under **Default value** for both values.<br> &nbsp; <br>
 ![ADF Parameters](/img/6-adfparameters.png)
 
 8.	Add a **Web** activity to the canvas and link it to the **On Fail output** of your activity and rename the Web activity to **Send Notification**.<br> &nbsp; <br>
 ![ADF Parameters](/img/7-webactivity.png)
 
-9.	On the settings tab, perform the following steps.
-    a. Paste the **HTTP POST URL** from your Logic App to the URL field.
-    b. Set Method to **POST**.
+9.	On the settings tab, perform the following steps.<br>
+    a. Paste the **HTTP POST URL** from your Logic App to the URL field.<br>
+    b. Set Method to **POST**.<br>
     c. Under Body, add the following JSON…
 
     ```json
