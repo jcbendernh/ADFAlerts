@@ -57,9 +57,9 @@ Please keep <b>Plan type = Consumption</b>.  All other settings can be modified 
 ![ADF Parameters](/img/7-webactivity.png)
 
 9.	On the settings tab, perform the following steps.<br>
-    a. Paste the **HTTP POST URL** from your Logic App to the URL field.<br>
-    b. Set Method to **POST**.<br>
-    c. Under Body, add the following JSON…
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a. Paste the **HTTP POST URL** from your Logic App to the URL field.<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b. Set Method to **POST**.<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;c. Under Body, add the following JSON.
 
     ```json
     {
