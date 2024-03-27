@@ -35,7 +35,7 @@ Please keep <b>Plan type = Consumption</b>.  All other settings can be modified 
 
     ```
 <br> &nbsp;<br> 
-    <div style="padding-left: 40px">
+    <div style="padding-left: 50px">
           ![Logic App Trigger](/img/2-logicapptrigger.png)
     </div>
 
@@ -49,3 +49,36 @@ Please keep <b>Plan type = Consumption</b>.  All other settings can be modified 
 
 6. Next Save your Logic App and go back to the **When a HTTP request is received trigger** and retrieve the **HTTP POST URL** and copy it to Notepad.<br> &nbsp; <br>
 ![HTTP POST URL](/img/5-requestbodyjson.png)
+
+7. Within **Azure Data Factory**, open your pipeline and add the following parameters to your pipeline that will be used to populate the Logic App.  Make sure to add a **valid email** and a **valid URL to your Data Factory Studio** under Default value for both values.<br> &nbsp; <br>
+![ADF Parameters](/img/6-adfparameters.png)
+
+8.	Add a **Web** activity to the canvas and link it to the **On Fail output** of your activity and rename the Web activity to **Send Notification**.<br> &nbsp; <br>
+![ADF Parameters](/img/7-webactivity.png)
+
+9.	On the settings tab, perform the following steps.
+    a. Paste the **HTTP POST URL** from your Logic App to the URL field.
+    b. Set Method to **POST**.
+    c. Under Body, add the following JSON…
+
+    ```json
+    {
+        "DataFactory":"@{pipeline().DataFactory}",
+        "DataFactoryURL":"@{concat('https://adf.azure.com/en/monitoring/pipelineruns/', pipeline().RunId, substring(pipeline().parameters.DataFactoryURL, 29, add(length(pipeline().parameters.DataFactoryURL),-29)))}",
+        "PipelineName":"@{pipeline().Pipeline}",
+        "PipelineRunID":"@{pipeline().RunId}",
+        "PipelineStatus":"Success",
+        "Recipient": "@{pipeline().parameters.Recipient"
+    }
+
+    ```
+**NOTE**:  The DataFactoryURL has 3 parts to it.  Its purpose is to be used as a link that will take you right the Pipeline Run Summary page within the Azure Data Factory Studio under Monitor. <br>
+     i. https://adf.azure.com/en/monitoring/pipelineruns/ this is the standard ADF path for US/Enaglish based Azure Data Factories.  If your region/language is different, your path may vary.<br>
+     ii. The GUID for the Pipeline Run ID. **DO NOT MODIFY THIS**.<br>
+     iii. This section is the last x characters of your Data Factory Studio URL.  It is based on the value you added for the **DataFactoryURL** parameter for the pipeline. 
+
+10.	Next save your pipeline and when you get a failure on an activity you should receive an alert.  Alternatively, you can test on a success of the pipeline by switching the input of the Web activity to the **On success output** of your activity.<br.>  
+*Just remeber to switch it back after testing.* <br> &nbsp; <br>
+![ADF Parameters](/img/8-onsuccess.png)
+
+**NOTE**:  One **Send Notification** activity can be tied to multiple activity outputs in the same pipeline. 
