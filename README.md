@@ -1,4 +1,4 @@
-# ADFAlerts
+# Azure Data Factory Alerts
 This repository utilizes a creative method to utilize alerting in Azure Data Factory via Logic Apps.  Below are the steps to setup a failure alert.  You could also modify these to create success alerts as well.
 
 1.	Create the <B>Logic App</B> using the settings below as guidance. <BR>
