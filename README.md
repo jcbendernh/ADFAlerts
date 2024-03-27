@@ -73,11 +73,9 @@ Please keep <b>Plan type = Consumption</b>.  All other settings can be modified 
 
     ```
 **NOTE**:  The DataFactoryURL has 3 parts to it.  Its purpose is to be used as a link that will take you right the Pipeline Run Summary page within the Azure Data Factory Studio under Monitor. <br>
-    <div style="padding-left: 40px">
-     i. https://adf.azure.com/en/monitoring/pipelineruns/ this is the standard ADF path for US/Enaglish based Azure Data Factories.  If your region/language is different, your path may vary.<br>
-     ii. The GUID for the Pipeline Run ID. **DO NOT MODIFY THIS**.<br>
-     iii. This section is the last x characters of your Data Factory Studio URL.  It is based on the value you added for the **DataFactoryURL** parameter for the pipeline. 
-    </div>
+- https://adf.azure.com/en/monitoring/pipelineruns/ this is the standard ADF path for US/Enaglish based Azure Data Factories.  If your region/language is different, your path may vary.<br>
+- The GUID for the Pipeline Run ID. **DO NOT MODIFY THIS**.<br>
+- This section is the last x characters of your Data Factory Studio URL.  It is based on the value you added for the **DataFactoryURL** parameter for the pipeline. 
 10.	Next save your pipeline and when you get a failure on an activity you should receive an email alert with a valid link to the Pipeline Run summary.<br>  *Alternatively, you can test on a success of the pipeline by switching the input of the **Web** activity to the **On success output** of your activity.*<br>&nbsp; <br>
 ![ADF Parameters](/img/8-onsuccess.png)
 
