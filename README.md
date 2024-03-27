@@ -46,3 +46,6 @@ Please keep <b>Plan type = Consumption</b>.  All other settings can be modified 
 
 5. Sign in using your Office 365 account and use the Enter the data from the previous step option so that you have an intuitive email subject and body. <br> &nbsp; <br>
 ![Logic App Email](/img/4-logicappemail.png)
+
+6. Next Save your Logic App and go back to the **When a HTTP request is received trigger** and retrieve the **HTTP POST URL** and copy it to Notepad.<br> &nbsp; <br>
+![HTTP POST URL](/img/5-requestbodyjson.png)
